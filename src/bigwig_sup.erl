@@ -23,6 +23,10 @@ start_link() ->
 %% ===================================================================
 
 init([]) ->
+    application:start(sasl),
+    application:start(ibrowse),
+    application:start(couchbeam),
+
     Pubsub      = ?CHILD(bigwig_pubsubhub, worker),
     StatsSender = ?CHILD(bigwig_stats_sender, worker),
     Http        = ?CHILD(bigwig_http, worker),
